@@ -1,5 +1,6 @@
 package tstu.tlc.tstutwitterclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,10 +16,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.vk.sdk.VKAccessToken;
+import com.vk.sdk.VKCallback;
+import com.vk.sdk.VKSdk;
+import com.vk.sdk.api.VKError;
+import com.vk.sdk.api.VKRequest;
+import com.vk.sdk.api.VKResponse;
+import com.vk.sdk.api.model.VKUsersArray;
 import com.vk.sdk.util.VKUtil;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private VKClient vkClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +56,48 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Button button = (Button) findViewById(R.id.login);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
+        button.setOnClickListener(v -> login());
+
+        // ПОЛУЧАЕМ СПИСОК ДРУЗЕЙ
+//        button.setOnClickListener(v -> vkClient.getFriendsList(new VKRequest.VKRequestListener() {
+//            @Override
+//            public void onComplete(VKResponse response) {
+//                super.onComplete(response);
+//                VKUsersArray array = (VKUsersArray)response.parsedModel;
+//            }
+//
+//            @Override
+//            public void onError(VKError error) {
+//                super.onError(error);
+//                Log.d("TSTU","REQUEST FRIEND ERROR");
+//            }
+//        }));
+
+        vkClient = TSTUApplication.getVkClient();
     }
 
-    public void login(){
-        TSTUApplication.getVkClient().Login(this);
+    public void login() {
+        if (!vkClient.isLoggedIn())
+            vkClient.Login(this);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!vkClient.onVKLogin(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
+            @Override
+            public void onResult(VKAccessToken res) {
+                // Пользователь успешно авторизовался
+                Log.d("TSTU", "LOGGED IN");
+            }
+
+            @Override
+            public void onError(VKError error) {
+                // Произошла ошибка авторизации (например, пользователь запретил авторизацию)
+                Log.d("TSTU", "NOT LOGGED IN");
+            }
+        })) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
