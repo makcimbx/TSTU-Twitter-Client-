@@ -4,10 +4,11 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+        <group />
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/vk_friends"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Friends" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"

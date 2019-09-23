@@ -15,6 +15,7 @@ import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 import com.vk.sdk.api.methods.VKApiFriends;
+import com.vk.sdk.api.model.VKApiCommunity;
 import com.vk.sdk.api.model.VKApiUserFull;
 import com.vk.sdk.api.model.VKApiCommunityArray;
 import com.vk.sdk.api.model.VKUsersArray;
@@ -24,7 +25,7 @@ public class VKClient {
 
     public VKClient(){ VKSdk.initialize(TSTUApplication.getAppContext()); }
 
-    public void Login(Activity activity){ VKSdk.login(activity); }
+    public void Login(Activity activity){ VKSdk.login(activity,"friends","photos","wall","groups","notifications"); }
 
     public boolean isLoggedIn() { return VKSdk.isLoggedIn(); }
 
@@ -33,7 +34,7 @@ public class VKClient {
     }
 
     public void getFriendsList(VKRequest.VKRequestListener listener) {
-        VKRequest request = VKApi.friends().get(VKParameters.from());
+        VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.FIELDS, "photo_50, contacts", "city", "nickname"));
         request.executeWithListener(listener);
     }
 }

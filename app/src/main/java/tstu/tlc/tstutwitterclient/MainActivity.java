@@ -58,20 +58,7 @@ public class MainActivity extends AppCompatActivity
         Button button = (Button) findViewById(R.id.login);
         button.setOnClickListener(v -> login());
 
-        // ПОЛУЧАЕМ СПИСОК ДРУЗЕЙ
-//        button.setOnClickListener(v -> vkClient.getFriendsList(new VKRequest.VKRequestListener() {
-//            @Override
-//            public void onComplete(VKResponse response) {
-//                super.onComplete(response);
-//                VKUsersArray array = (VKUsersArray)response.parsedModel;
-//            }
-//
-//            @Override
-//            public void onError(VKError error) {
-//                super.onError(error);
-//                Log.d("TSTU","REQUEST FRIEND ERROR");
-//            }
-//        }));
+
 
         vkClient = TSTUApplication.getVkClient();
     }
@@ -138,8 +125,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.vk_friends) {
+            Log.d("TSTU", "OPEN FRIENDS MENU");
+            Intent intent = new Intent (this, FriendsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
