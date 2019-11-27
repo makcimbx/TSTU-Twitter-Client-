@@ -76,7 +76,7 @@ public class VKClient {
     }
 
     public void getPhotoById(VKRequest.VKRequestListener listener, String userId, String photoId) {
-        VKRequest request = new VKRequest("photos.getById", VKParameters.from(VKApiConst.PHOTOS, photoId), VKRequest.HttpMethod.GET, VKApiPhoto.class);
+        VKRequest request = new VKRequest("photos.getById", VKParameters.from(VKApiConst.PHOTOS, photoId));
         request.attempts = 5;
         request.executeWithListener(listener);
     }

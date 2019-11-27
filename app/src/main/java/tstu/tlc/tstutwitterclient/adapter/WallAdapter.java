@@ -74,6 +74,7 @@ public class WallAdapter extends RecyclerView.Adapter<WallAdapter.WallViewHolder
 
             if(post.attachments.getCount() > 0 && post.attachments.get(0).getType() == VKAttachments.TYPE_PHOTO) {
                 String tweetPhotoUrl =  post.attachments.get(0).toAttachmentString().toString().replace("photo", "");
+                Log.d("TSTU", tweetPhotoUrl);
                 vkClient.getPhotoById(new VKRequest.VKRequestListener() {
                     @Override
                     public void onComplete(VKResponse response) {
@@ -82,15 +83,16 @@ public class WallAdapter extends RecyclerView.Adapter<WallAdapter.WallViewHolder
                         URL url = null;
                         VKApiPhoto photo = new VKApiPhoto();
                         try {
+                            Log.d("TSTU" ,"FIRST");
                             photo.parse(response.json);
-
+                            Log.d("TSTU" ,"SECOND");
                         }
                         catch (Exception e) {
                             Log.d("TSTU","PARSE EXCEPTION" + e);
                             photo = null;
                         }
 
-                        Log.d("YES", photo == null);
+                        Log.d("TSTU", photo.photo_604);
 
                         //Glide.with(wallImageView.getContext()).load(photo.photo_604).into(wallImageView);
                     }
