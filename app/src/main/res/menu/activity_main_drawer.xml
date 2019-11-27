@@ -6,17 +6,19 @@
     <group android:checkableBehavior="single">
         <group />
         <item
+            android:id="@+id/vk_current_user_wall"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="User Wall" />
+
+        <item
             android:id="@+id/vk_friends"
             android:icon="@drawable/ic_menu_camera"
             android:title="Friends" />
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/vk_messages"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Messages" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

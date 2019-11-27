@@ -1,11 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:id="@+id/user_element_layout"
+    android:id="@+id/message_element_layout"
     android:layout_height="wrap_content" >
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/imageview_user"
+        android:id="@+id/message_imageview_user"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@mipmap/ic_launcher"
@@ -15,10 +15,10 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/online_user"
+        android:id="@+id/message_online_user"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_alignRight="@id/imageview_user"
+        android:layout_alignRight="@id/message_imageview_user"
         android:src="@mipmap/ic_launcher"
         android:layout_marginTop="61dp"
         android:layout_marginRight="4dp"
@@ -26,16 +26,27 @@
         app:civ_border_color="#FF000000"/>
 
     <TextView
-        android:id="@+id/text_view_name"
+        android:id="@+id/message_text_view_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageview_user"
-        android:layout_marginTop="35dp"
+        android:layout_alignLeft="@+id/message_imageview_user"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="85dp"
+        android:textSize="17dp"
+        android:text="NAME" />
+
+    <TextView
+        android:id="@+id/message_text_view_last_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/message_imageview_user"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="85dp"
+        android:textSize="13dp"
         android:text="NAME" />
 
     <View
-        android:layout_below="@+id/imageview_user"
+        android:layout_below="@+id/message_imageview_user"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:alpha="0.5"

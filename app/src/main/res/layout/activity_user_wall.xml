@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserWall">
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <ImageView
+            android:id="@+id/user_wall_image_user"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="match_parent"
+            android:layout_height="600dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/user_wall_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/frame_layout"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:text="NAME" />
+
+    <TextView
+        android:id="@+id/user_wall_online_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/frame_layout"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="online" />
+
+    <TextView
+        android:id="@+id/user_wall_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/frame_layout"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="О себе" />
+
+    <TextView
+        android:id="@+id/user_wall_ages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/frame_layout"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="18 лет" />
+
+    <TextView
+        android:id="@+id/user_wall_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/frame_layout"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Мужчина" />
+
+    <TextView
+        android:id="@+id/user_wall_country_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/frame_layout"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Cтрана Россия город Тамбов" />
+
+    <Button
+        android:id="@+id/user_wall_to_messages"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="280dp"
+        android:text="Перейти к личным сообщениями"/>
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/user_wall_post_input"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="340dp"/>
+
+    <Button
+        android:id="@+id/user_wall_post"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="380dp"
+        android:text="Запостить на стену сообщение"/>
+
+    <Button
+        android:id="@+id/user_wall_go"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="450dp"
+        android:text="Перейти к списку постов"/>
+
+</RelativeLayout>

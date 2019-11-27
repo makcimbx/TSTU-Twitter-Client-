@@ -10,43 +10,42 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
-import com.squareup.picasso.Picasso;
 import com.vk.sdk.api.VKError;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
+import com.vk.sdk.api.methods.VKApiMessages;
+import com.vk.sdk.api.model.VKApiDialog;
 import com.vk.sdk.api.model.VKApiUserFull;
+import com.vk.sdk.api.model.VKList;
+import com.vk.sdk.api.model.VKNotesArray;
 import com.vk.sdk.api.model.VKUsersArray;
 
 import java.util.Comparator;
 
 import tstu.tlc.tstutwitterclient.adapter.FriendsAdapter;
+import tstu.tlc.tstutwitterclient.adapter.MessagesAdapter;
 
-public class FriendsActivity extends AppCompatActivity {
+public class MessagesActivity extends AppCompatActivity {
 
     private VKClient vkClient;
-    private RelativeLayout layout;
     private RecyclerView tweetsRecyclerView;
-    private FriendsAdapter friendsAdapter;
+    private MessagesAdapter messagesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends);
+        setContentView(R.layout.activity_messages);
 
-        layout = findViewById(R.id.frinds_layout);
         initRecyclerView();
 
         vkClient = TSTUApplication.getVkClient();
 
-        setTitle("Список друзей");
-
-        // ПОЛУЧАЕМ СПИСОК ДРУЗЕЙ
-        vkClient.getFriendsList(new VKRequest.VKRequestListener() {
+        vkClient.getUserDialogs(new VKRequest.VKRequestListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onComplete(VKResponse response) {
                 super.onComplete(response);
-                VKUsersArray array = new VKUsersArray();
+                VKList<VKApiDialog> array = new VKList<VKApiDialog>();
                 Log.d("TSTU", response.json.toString());
                 try {
                     array.parse(response.json);
@@ -57,44 +56,36 @@ public class FriendsActivity extends AppCompatActivity {
                     array = null;
                 }
 
-                OnFriendsListResponded(array);
+                OnDialogListResponded(array);
             }
 
             @Override
             public void onError(VKError error) {
                 super.onError(error);
-                Log.d("TSTU","REQUEST FRIEND ERROR");
+                Log.d("TSTU","REQUEST MESSAGES ERROR");
             }
         });
     }
 
     private void initRecyclerView() {
-        tweetsRecyclerView = findViewById(R.id.tweets_recycler_view);
+        tweetsRecyclerView = findViewById(R.id.messages_recycler_view);
         tweetsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        friendsAdapter = new FriendsAdapter(new FriendsAdapter.UserClickListener() {
+        messagesAdapter = new MessagesAdapter(new MessagesAdapter.UserClickListener() {
             @Override
-            public void OnClick(VKApiUserFull userFull) {
-                Intent intent = new Intent (FriendsActivity.this, UserWall.class);
-                intent.putExtra("userId",userFull.id);
+            public void OnClick(VKApiDialog userFull) {
+                Intent intent = new Intent (MessagesActivity.this, UserWall.class);
+                intent.putExtra("userId",userFull.getId());
                 startActivity(intent);
             }
         });
-        tweetsRecyclerView.setAdapter(friendsAdapter);
+        tweetsRecyclerView.setAdapter(messagesAdapter);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void OnFriendsListResponded(VKUsersArray usersArray)  {
+    private void OnDialogListResponded(VKList<VKApiDialog> usersArray)  {
         if (usersArray != null) Log.d("TSTU","GET " + usersArray.size() + " friends");
 
-        usersArray.sort(new LexicographicComparator());
-        friendsAdapter.setItems(usersArray);
-    }
-
-    class LexicographicComparator implements Comparator<VKApiUserFull> {
-        @Override
-        public int compare(VKApiUserFull a, VKApiUserFull b) {
-            return a.first_name.compareToIgnoreCase(b.first_name);
-        }
+        messagesAdapter.setItems(usersArray);
     }
 }

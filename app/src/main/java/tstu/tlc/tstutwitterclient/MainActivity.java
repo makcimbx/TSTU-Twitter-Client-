@@ -129,10 +129,33 @@ public class MainActivity extends AppCompatActivity
             Log.d("TSTU", "OPEN FRIENDS MENU");
             Intent intent = new Intent (this, FriendsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.vk_current_user_wall) {
+            Log.d("TSTU", "OPEN USER WALL");
+            vkClient.getCurrentUserID(new VKRequest.VKRequestListener() {
+                @Override
+                public void onComplete(VKResponse response) {
+                    super.onComplete(response);
 
-        } else if (id == R.id.nav_slideshow) {
+                    VKUsersArray array = new VKUsersArray();
+                    Log.d("TSTU", response.json.toString());
+                    try {
+                        array.parse(response.json);
 
+                    }
+                    catch (Exception e) {
+                        Log.d("TSTU", "PARSE EXCEPTION");
+                        array = null;
+                    }
+
+                    Intent intent = new Intent (MainActivity.this, UserWall.class);
+                    intent.putExtra("userId",array.get(0).id);
+                    startActivity(intent);
+                }
+            });
+        } else if (id == R.id.vk_messages) {
+            Log.d("TSTU", "OPEN MESSAGES MENU");
+            Intent intent = new Intent (this, MessagesActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
