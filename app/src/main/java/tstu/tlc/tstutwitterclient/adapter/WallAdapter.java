@@ -24,6 +24,9 @@ import com.vk.sdk.api.model.VKAttachments;
 import com.vk.sdk.api.model.VKPostArray;
 import com.vk.sdk.api.model.VKUsersArray;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -83,18 +86,15 @@ public class WallAdapter extends RecyclerView.Adapter<WallAdapter.WallViewHolder
                         URL url = null;
                         VKApiPhoto photo = new VKApiPhoto();
                         try {
-                            Log.d("TSTU" ,"FIRST");
-                            photo.parse(response.json);
-                            Log.d("TSTU" ,"SECOND");
+
+                            JSONArray object = response.json.optJSONArray("response");
+                            photo.parse(object.getJSONObject(0));
                         }
                         catch (Exception e) {
                             Log.d("TSTU","PARSE EXCEPTION" + e);
                             photo = null;
                         }
-
-                        Log.d("TSTU", photo.photo_604);
-
-                        //Glide.with(wallImageView.getContext()).load(photo.photo_604).into(wallImageView);
+                        Glide.with(wallImageView.getContext()).load(photo.photo_604).into(wallImageView);
                     }
 
                     @Override

@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".wall_posts"></activity>
+        <activity android:name=".GroupWall"></activity>
+        <activity android:name=".GroupsActivity" />
+        <activity android:name=".wall_posts" />
         <activity android:name=".MessagesActivity" />
         <activity android:name=".UserWall" />
         <activity android:name=".FriendsActivity" />

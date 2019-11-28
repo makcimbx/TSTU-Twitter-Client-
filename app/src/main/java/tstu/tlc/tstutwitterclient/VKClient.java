@@ -76,12 +76,28 @@ public class VKClient {
     }
 
     public void getPhotoById(VKRequest.VKRequestListener listener, String userId, String photoId) {
-        VKRequest request = new VKRequest("photos.getById", VKParameters.from(VKApiConst.PHOTOS, photoId));
+        VKRequest request = new VKRequest("photos.getById", VKParameters.from(VKApiConst.PHOTOS, photoId), VKApiPhoto.class);
         request.attempts = 5;
         request.executeWithListener(listener);
     }
 
     public void getCommentsById(VKRequest.VKRequestListener listener, String userId, String postId) {
 
+    }
+
+    public void getUserGroups(VKRequest.VKRequestListener listener) {
+        VKRequest request = VKApi.groups().get(VKParameters.from(VKApiConst.COUNT, 50, VKApiConst.EXTENDED, 1));
+        request.attempts = 5;
+        request.executeWithListener(listener);
+    }
+
+    public void getGroupById(VKRequest.VKRequestListener listener, String groupId, String... fields) {
+        String field = "";
+        for(String item: fields) {
+            field += item + ",";
+        }
+        VKRequest request = VKApi.groups().getById(VKParameters.from(VKApiConst.GROUP_ID, groupId, VKApiConst.FIELDS, field));
+        request.attempts = 5;
+        request.executeWithListener(listener);
     }
 }

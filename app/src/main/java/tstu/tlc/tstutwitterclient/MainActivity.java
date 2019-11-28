@@ -156,8 +156,10 @@ public class MainActivity extends AppCompatActivity
             Log.d("TSTU", "OPEN MESSAGES MENU");
             Intent intent = new Intent (this, MessagesActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_manage) {
-
+        } else if (id == R.id.vk_groups) {
+            Log.d("TSTU", "OPEN GROUPS MENU");
+            Intent intent = new Intent (this, GroupsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
