@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        tstuConfig {
+            storeFile file("${rootDir}/../makcimbx.jks")
+            storePassword 'P5LLu7vdvwbTZGeQBaCE4NTehPBtL2sS'
+            keyAlias 'makcimbxKey'
+            keyPassword 'P5LLu7vdvwbTZGeQBaCE4NTehPBtL2sS'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "tstu.tlc.tstutwitterclient"
@@ -14,6 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.tstuConfig
+        }
+        debug {
+            signingConfig signingConfigs.tstuConfig
         }
     }
     compileOptions {
