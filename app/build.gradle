@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         tstuConfig {
-            storeFile file("${rootDir}/../makcimbx.jks")
+            storeFile file("${rootDir}/../TSTU-Twitter-Client-/makcimbx.jks")
             storePassword 'P5LLu7vdvwbTZGeQBaCE4NTehPBtL2sS'
             keyAlias 'makcimbxKey'
             keyPassword 'P5LLu7vdvwbTZGeQBaCE4NTehPBtL2sS'
