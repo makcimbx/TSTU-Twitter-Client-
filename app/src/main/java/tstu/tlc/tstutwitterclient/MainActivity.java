@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity
             Log.d("TSTU", finger);
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
