@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/group_element_layout"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,9 +26,8 @@
         android:id="@+id/group_text_view_last_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/message_imageview_user"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="85dp"
+        android:layout_toRightOf="@+id/group_imageview_user"
+        android:layout_below="@+id/group_text_view_name"
         android:textSize="13dp"
         android:text="NAME" />
 
@@ -35,7 +35,7 @@
         android:layout_below="@+id/group_imageview_user"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:alpha="0.5"
+        android:alpha="0.25"
         android:background="#7b7b7b"></View>
 
 </RelativeLayout>
