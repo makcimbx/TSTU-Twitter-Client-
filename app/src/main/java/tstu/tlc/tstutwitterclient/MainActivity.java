@@ -37,6 +37,11 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String[] fingerprints = VKUtil.getCertificateFingerprint(this, this.getPackageName());
+        for (String finger : fingerprints) {
+            Log.d("TSTU", finger);
+        }
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
