@@ -9,17 +9,15 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@mipmap/ic_launcher"
-        android:layout_margin="10dp"
-        app:civ_border_width="1dp"
-        app:civ_border_color="#FF000000"/>
+        android:layout_margin="10dp"/>
 
     <TextView
         android:id="@+id/group_text_view_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/message_imageview_user"
+        android:layout_toRightOf="@+id/group_imageview_user"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="85dp"
+        android:layout_marginBottom="10dp"
         android:textSize="17dp"
         android:text="NAME" />
 
