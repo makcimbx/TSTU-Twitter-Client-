@@ -8,12 +8,18 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="hello"
-        android:textColor="@color/red_color" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Вход"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorTextButton"
+            android:theme="@style/ButtonTheme"/>
+    </RelativeLayout>
 
     <include
         layout="@layout/app_bar_main"
