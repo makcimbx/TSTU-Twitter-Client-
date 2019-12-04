@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textSize="17dp"
         android:text="Sometext" />
 
@@ -18,14 +18,16 @@
         android:layout_below="@+id/wall_text_view_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <View
-        android:layout_below="@+id/wall_image_view"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="10dp"
-        android:alpha="0.5"
+        android:layout_below="@+id/wall_image_view"
+        android:alpha="0.25"
         android:background="#7b7b7b"></View>
 
 </RelativeLayout>
