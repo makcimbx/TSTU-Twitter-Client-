@@ -114,20 +114,24 @@ public class UserWall extends AppCompatActivity {
         userCity.setText("Страна " + user.country + " город " + user.city);
 
         String tweetPhotoUrl = user.photo_400_orig;
-        Glide.with(userImage.getContext()).load(tweetPhotoUrl).into(new SimpleTarget<Drawable>() {
-            @Override
-            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                int w = resource.getIntrinsicHeight();
-                int h = resource.getIntrinsicWidth();
-                Bitmap bitmap = ((BitmapDrawable) resource).getBitmap();
-                Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, userImage.getWidth(), (userImage.getWidth() / w) * h, true));
-                ViewGroup.LayoutParams params = userImage.getLayoutParams();
-                params.width = userImage.getWidth();
-                params.height = (userImage.getWidth() / w) * h;
-                userImage.setLayoutParams(params);
-                userImage.setImageDrawable(d);
-            }
-        });
+        Glide.with(userImage.getContext()).load(tweetPhotoUrl).into(userImage);
+//        Glide.with(userImage.getContext()).load(tweetPhotoUrl).into(new SimpleTarget<Drawable>() {
+//            @Override
+//            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+//                int w = resource.getIntrinsicHeight();
+//                int h = resource.getIntrinsicWidth();
+//                Bitmap bitmap = ((BitmapDrawable) resource).getBitmap();
+//                Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, userImage.getWidth(), (userImage.getWidth() / w) * h, true));
+//                ViewGroup.LayoutParams params = userImage.getLayoutParams();
+//                params.width = userImage.getWidth();
+//                params.height = (userImage.getWidth() / w) * h;
+//                Log.d("TSTU", "WIDTH: " + userImage.getWidth() + "; HEIGHT: " + ((userImage.getWidth() / w) * h));
+//                userImage.setLayoutParams(params);
+//                userImage.setImageDrawable(d);
+//
+//                Log.d("TSTU", "WIDTH: " + userImage.getWidth() + "; HEIGHT: " + userImage.getHeight());
+//            }
+//        });
 
 
         toPostButton.setOnClickListener(new View.OnClickListener() {

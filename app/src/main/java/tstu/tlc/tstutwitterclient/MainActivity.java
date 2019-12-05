@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,13 +16,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
+import com.vk.sdk.api.model.VKApiUserFull;
 import com.vk.sdk.api.model.VKUsersArray;
 import com.vk.sdk.util.VKUtil;
 
@@ -29,6 +34,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private VKClient vkClient;
+    private ImageView imageUser;
+    private TextView textViewUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,8 @@ public class MainActivity extends AppCompatActivity
         for (String finger : fingerprints) {
             Log.d("TSTU", finger);
         }
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode());
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +89,48 @@ public class MainActivity extends AppCompatActivity
             public void onResult(VKAccessToken res) {
                 // Пользователь успешно авторизовался
                 Log.d("TSTU", "LOGGED IN");
+                vkClient.getCurrentUserID(new VKRequest.VKRequestListener() {
+                    @Override
+                    public void onComplete(VKResponse response) {
+                        super.onComplete(response);
+
+                        VKUsersArray array = new VKUsersArray();
+                        Log.d("TSTU", response.json.toString());
+                        try {
+                            array.parse(response.json);
+
+                        }
+                        catch (Exception e) {
+                            Log.d("TSTU", "PARSE EXCEPTION");
+                            array = null;
+                        }
+
+                        vkClient.getUserById(new VKRequest.VKRequestListener() {
+                            @Override
+                            public void onComplete(VKResponse response) {
+                                super.onComplete(response);
+                                VKUsersArray array = new VKUsersArray();
+                                Log.d("TSTU", response.json.toString());
+                                try {
+                                    array.parse(response.json);
+
+                                }
+                                catch (Exception e) {
+                                    Log.d("TSTU","PARSE EXCEPTION");
+                                    array = null;
+                                }
+                                UpdateMiniAvatar(array.get(0));
+                            }
+
+                            @Override
+                            public void onError(VKError error) {
+                                super.onError(error);
+
+                                Log.d("TSTU","USER DOWNLOAD ERROR");
+                            }
+                        }, array.get(0).id, "photo_50");
+                    }
+                });
             }
 
             @Override
@@ -174,5 +225,16 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void UpdateMiniAvatar(VKApiUserFull userFull) {
+
+        imageUser = (ImageView) findViewById(R.id.topimageuser);
+        textViewUser = (TextView) findViewById(R.id.firstlastnametop);
+
+        textViewUser.setText(userFull.first_name + " " + userFull.last_name);
+
+        String tweetPhotoUrl = userFull.photo_50;
+        Glide.with(imageUser.getContext()).load(tweetPhotoUrl).into(imageUser);
     }
 }
